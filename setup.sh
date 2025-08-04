@@ -44,6 +44,6 @@ fi
 
 echo "[*] Setting default shell to zsh ..."
 chsh -s "$(command -v zsh)" "$USER"
-
-echo "[✓] Done.  Log out and back in, or run: exec zsh"
+exec zsh
+echo "[✓] Done."
 
