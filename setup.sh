@@ -16,7 +16,7 @@ echo "[*] Installing vim-plug ..."
 curl -fsSL "$VIM_PLUG_URL" -o "${HOME}/.vim/autoload/plug.vim" --create-dirs
 
 echo "[*] Fetching dot-files ..."
-curl -fsSL "${REPO_BASE}/dotfiles/.vimrc" -o "${HOME}/.vimrc"
+curl -fsSL "${REPO_BASE}/dotfiles/vimrc" -o "${HOME}/.vimrc"
 
 echo "[*] Installing Vim plugins (non-interactive) ..."
 vim -Es -u NONE \
@@ -40,10 +40,10 @@ if [ ! -d "$PLUGIN_DIR" ]; then
 fi
 
 # Add plugin to ~/.zshrc if not present
-if ! grep -q "zsh-autocomplete" "$HOME/.zshrc"; then
-  echo "[*] Enabling zsh-autocomplete plugin ..."
-  sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autocomplete)/' "$HOME/.zshrc"
-fi
+#if ! grep -q "zsh-autocomplete" "$HOME/.zshrc"; then
+  #echo "[*] Enabling zsh-autocomplete plugin ..."
+  #sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autocomplete)/' "$HOME/.zshrc"
+#fi
 
 # Set theme to agnoster
 echo "[*] Setting Oh-My-Zsh theme to ${ZSH_THEME_NAME} ..."
