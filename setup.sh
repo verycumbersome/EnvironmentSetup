@@ -45,5 +45,23 @@ fi
 echo "[*] Setting default shell to zsh ..."
 chsh -s "$(command -v zsh)" "$USER"
 exec zsh
+
+# Ensure the plugin is listed in ~/.zshrc
+if ! grep -q "zsh-autocomplete" "$HOME/.zshrc"; then
+  echo "[*] Adding zsh-autocomplete to plugin list ..."
+  sed -i 's/^plugins=(\(.*\))/plugins=(\1 zsh-autocomplete)/' "$HOME/.zshrc"
+fi
+
+# --- set theme ---------------------------------------------------
+echo "[*] Setting ZSH theme to agnoster ..."
+if grep -q '^ZSH_THEME=' "$HOME/.zshrc"; then
+  sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' "$HOME/.zshrc"
+else
+  echo 'ZSH_THEME="agnoster"' >> "$HOME/.zshrc"
+fi
+# ----------------------------------------------------------------
+
 echo "[✓] Done."
+
+
 
