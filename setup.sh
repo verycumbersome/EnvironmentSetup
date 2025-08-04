@@ -61,6 +61,34 @@ else
 fi
 # ----------------------------------------------------------------
 
+# ------------------------------------------------------------
+# System-wide zsh defaults (optional – comment out if not wanted)
+# ------------------------------------------------------------
+echo "[*] Making zsh the default shell system-wide ..."
+
+ZSH_BIN="$(command -v zsh)"
+
+# 1. Ensure zsh is in /etc/shells
+if ! grep -qxF "$ZSH_BIN" /etc/shells; then
+  echo "$ZSH_BIN" | sudo tee -a /etc/shells >/dev/null
+fi
+
+# 2. Current user (already done earlier, but harmless if repeated)
+sudo chsh -s "$ZSH_BIN" "$USER"
+
+# 3. Root (remove if you prefer root to stay on bash)
+sudo chsh -s "$ZSH_BIN" root
+
+# 4. Make zsh the default for future users
+sudo sed -i "s|^DSHELL=.*|DSHELL=$ZSH_BIN|" /etc/adduser.conf
+sudo sed -i "s|^SHELL=.*|SHELL=$ZSH_BIN|" /etc/default/useradd
+
+# 5. (Optional) Force tmux panes to spawn zsh regardless of $SHELL
+if [ ! -f /etc/tmux.conf ] || ! grep -q "default-shell" /etc/tmux.conf; then
+  echo "set-option -g default-shell $ZSH_BIN" | sudo tee -a /etc/tmux.conf >/dev/null
+fi
+
+
 echo "[✓] Done."
 
 
