@@ -1,7 +1,6 @@
-# pi-dev-vim
+# EnvironmentSetup
 
 One-shot setup for a Raspberry Pi development environment:
 
 ```bash
-bash <(curl -sL https://raw.githubusercontent.com/verycumbersome/EnvironmentSetup/main/setup.sh)
-
+curl -fsSL https://raw.githubusercontent.com/verycumbersome/EnvironmentSetup/main/setup.sh | bash
